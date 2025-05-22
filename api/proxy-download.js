@@ -19,12 +19,14 @@ export default async function handler(req, res) {
     const response = await fetch("https://www.uidux.com/ajax/download", {
       method: "POST",
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "Referer": "https://www.uidux.com/",
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
-        "Cookie": "PHPSESSID=ab3jcurvtjvtrs951p2jjf4h"
-      },
-      body: new URLSearchParams({ projectID })
+  "Content-Type": "application/x-www-form-urlencoded",
+  "Referer": "https://www.uidux.com/",
+  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+  "Cookie": "PHPSESSID=ab3jcurvtjvtrs951p2jjf4h",
+  "Accept": "application/json, text/javascript, */*; q=0.01",
+  "X-Requested-With": "XMLHttpRequest"
+}
+     body: new URLSearchParams({ projectID })
     });
 
     const raw = await response.text();
