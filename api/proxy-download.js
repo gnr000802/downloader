@@ -1,4 +1,14 @@
 export default async function handler(req, res) {
+  // Habilitar CORS
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  // Responder a preflight (OPTIONS)
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Only POST allowed' });
   }
@@ -9,8 +19,7 @@ export default async function handler(req, res) {
     const response = await fetch('https://www.uidux.com/ajax/download', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        // Podés agregar headers como cookies o referers si es necesario
+        'Content-Type': 'application/x-www-form-urlencoded'
       },
       body: new URLSearchParams({ projectID })
     });
